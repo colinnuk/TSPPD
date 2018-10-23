@@ -1,4 +1,4 @@
-/// <reference path='types.ts'/>
+import { IWaypointOutput, ILocation, ITrip, WaypointOutput, Trip, Waypoint, TSLocation } from "./types";
 
 function printWaypointOutputs(waypoints: IWaypointOutput[])
 {
@@ -30,8 +30,8 @@ const execute = (trips: ITrip[]): IWaypointOutput[] =>
 {
 
     
-
-    return []
+    var route = [new WaypointOutput("1", 1),];
+    return route;
 }
 
 //create an example set of trips

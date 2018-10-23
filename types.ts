@@ -1,37 +1,37 @@
-type TripId = string
+export type TripId = string
 
-interface ILocation 
+export interface ILocation 
 {
     latitude: number,
     longitude: number
 }
 
-enum WaypointType 
+export enum WaypointType 
 {
     Pickup = 1,
     Dropoff = 2
 }
 
-interface IWaypoint
+export interface IWaypoint
 {
     type: WaypointType
     location: ILocation
 }
 
-interface ITrip 
+export interface ITrip 
 {
     id: TripId
     pickupWaypoint: IWaypoint
     dropoffWaypoint: IWaypoint
 }
 
-interface IWaypointOutput 
+export interface IWaypointOutput 
 {
     tripId: TripId
     type: WaypointType
 }
 
-class TSLocation implements ILocation 
+export class TSLocation implements ILocation 
 {
     constructor(latitude: number, longitude: number)
     {
@@ -43,7 +43,7 @@ class TSLocation implements ILocation
     longitude: number;
 }
 
-class Waypoint implements IWaypoint 
+export class Waypoint implements IWaypoint 
 {
     constructor(type: WaypointType, location: ILocation)
     {
@@ -55,7 +55,7 @@ class Waypoint implements IWaypoint
     location: ILocation;
 }
 
-class Trip implements ITrip 
+export class Trip implements ITrip 
 {
     constructor(id: string, pickupWaypoint: Waypoint, dropoffWaypoint: Waypoint)
     {
@@ -69,7 +69,7 @@ class Trip implements ITrip
     dropoffWaypoint: IWaypoint;
 }
 
-class WaypointOutput implements IWaypointOutput
+export class WaypointOutput implements IWaypointOutput
 {
     constructor(tripId: string, type: WaypointType)
     {
