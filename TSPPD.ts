@@ -58,6 +58,12 @@ export const execute = (trips: ITrip[]): IWaypointOutput[] =>
     return route;
 }
 
+/**
+*
+* @param waypointList Associative array of waypoints we can go to next
+* @param currentLocation Our current location
+* @returns The next leg of the trip to take. This is the closest Waypoint to our current location.
+*/
 export const findNearestLeg = (waypointList: {[key: string]: IWaypoint}, currentLocation: ILocation): ILeg =>
 {
     //find the nearest neighbouring trip
