@@ -3,9 +3,9 @@
 Travelling salesman problem with constraints on pickup and dropoff.
 https://drive.google.com/file/d/1nE782S8Ss68JepMQNeZhUrCUatKK4XvY/view
 
-### Executiong
+### Executing
 
-The algorithm can be run by executing the transpiled test.js in node. This sets it up with a test dataset and prints out results to the console.
+The algorithm can be run by executing the transpiled Test.js in node. This sets it up with a test dataset and prints out results to the console.
 
 ```
 node .\Test.js
