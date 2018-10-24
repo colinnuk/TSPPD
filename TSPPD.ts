@@ -1,4 +1,4 @@
-import { IWaypointOutput, ILocation, ITrip, WaypointOutput, Trip, Waypoint, TSLocation, WaypointType, IWaypoint } from "./types";
+import { IWaypointOutput, ILocation, ITrip, WaypointOutput, WaypointType, IWaypoint, ILeg, Leg } from "./types";
 
 /**
 *
@@ -28,10 +28,10 @@ export const execute = (trips: ITrip[]): IWaypointOutput[] =>
     let waypointsToVisit: {[key: string]: IWaypoint} = {};
     waypointsToVisit[firstTrip.id] = firstTrip.dropoffWaypoint;
 
-    //stores an assoc array we can quickly get the dropoffs out of
+    //stores an assoc array we can quickly get the dropoffs out of per trip
     let dropoffWaypoints: {[key: string]: IWaypoint} = {};
 
-    //fill waypointsToVisit with other pickups
+    //fill waypointsToVisit with other pickups and add all other dropoffs to our assoc array of dropoffs
     trips.forEach(element => {
         waypointsToVisit[element.id] = element.pickupWaypoint;
         dropoffWaypoints[element.id] = element.dropoffWaypoint;
@@ -41,54 +41,37 @@ export const execute = (trips: ITrip[]): IWaypointOutput[] =>
     while(Object.keys(waypointsToVisit).length > 0)
     {
         //While there are still nodes to visit
-        // Get the nearest neighbouring trip & remove it from waypointsToVisit
-        let nearestTrip = findNearestTrip(waypointsToVisit, currentLocation);
-        let nearestTripWaypoint = waypointsToVisit[nearestTrip];
-        currentLocation = nearestTripWaypoint.location;
-        delete waypointsToVisit[nearestTrip];
+        // Get the nearest neighbouring leg of the trip & remove it from waypointsToVisit
+        let nearestLeg = findNearestLeg(waypointsToVisit, currentLocation);
+        currentLocation = nearestLeg.waypoint.location;
+        delete waypointsToVisit[nearestLeg.tripId];
         
         // add waypoint to output
-        route.push(new WaypointOutput(nearestTrip, nearestTripWaypoint.type));
+        route.push(new WaypointOutput(nearestLeg.tripId, nearestLeg.waypoint.type));
         
         // If it’s a pickup, add the corresponding drop off to waypointsToVisit
-        if(nearestTripWaypoint.type == WaypointType.Pickup)
-            waypointsToVisit[nearestTrip] = dropoffWaypoints[nearestTrip];
-        
+        if(nearestLeg.waypoint.type == WaypointType.Pickup)
+            waypointsToVisit[nearestLeg.tripId] = dropoffWaypoints[nearestLeg.tripId];
+
     }
     
     return route;
 }
 
-export const findNearestTrip = (waypointList: {[key: string]: IWaypoint}, currentLocation: ILocation): string =>
+export const findNearestLeg = (waypointList: {[key: string]: IWaypoint}, currentLocation: ILocation): ILeg =>
 {
     //find the nearest neighbouring trip
-    let nearestNeighbour: string;
-    let nearestNeighbourDist = Infinity;
+    let nearestNeighbour: ILeg;
+    let nearestNeighbourDist: number = Infinity;
 
     Object.keys(waypointList).forEach(element => {
         let dist = distance(waypointList[element].location, currentLocation);
         if(dist < nearestNeighbourDist)
         {
-            nearestNeighbour = element;
+            nearestNeighbour = new Leg(element, waypointList[element]);
             nearestNeighbourDist = dist;
         }
     });
 
     return nearestNeighbour;
-}
-
-const convertWaypointType = (pickupType: WaypointType): string =>
-{
-    switch(pickupType)
-    {
-        case WaypointType.Pickup:  return "Pickup";
-        case WaypointType.Dropoff:  return "Dropoff";
-    }
-}
-
-export function printWaypointOutputs(waypoints: IWaypointOutput[])
-{
-    waypoints.forEach(element => {
-        console.log("Trip " + element.tripId + " " + convertWaypointType(element.type));
-    });
 }

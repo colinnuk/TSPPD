@@ -31,7 +31,13 @@ export interface IWaypointOutput
     type: WaypointType
 }
 
-export class TSLocation implements ILocation 
+export interface ILeg
+{
+    tripId: TripId
+    waypoint: IWaypoint
+}
+
+export class Location implements ILocation 
 {
     constructor(latitude: number, longitude: number)
     {
@@ -71,12 +77,24 @@ export class Trip implements ITrip
 
 export class WaypointOutput implements IWaypointOutput
 {
-    constructor(tripId: string, type: WaypointType)
+    constructor(tripId: TripId, type: WaypointType)
     {
         this.tripId = tripId;
         this.type = type;
     }
     
-    tripId: string;
+    tripId: TripId;
     type: WaypointType;
+}
+
+export class Leg implements ILeg
+{
+    constructor(tripId: TripId, waypoint: IWaypoint)
+    {
+        this.tripId = tripId;
+        this.waypoint = waypoint;
+    }
+
+    tripId: TripId;
+    waypoint: IWaypoint;
 }
