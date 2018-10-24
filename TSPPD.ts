@@ -1,11 +1,4 @@
-import { IWaypointOutput, ILocation, ITrip, WaypointOutput, Trip, Waypoint, TSLocation } from "./types";
-
-function printWaypointOutputs(waypoints: IWaypointOutput[])
-{
-    route.forEach(element => {
-        console.log("Trip " + element.tripId + " " + element.type);
-    });
-}
+import { IWaypointOutput, ILocation, ITrip, WaypointOutput, Trip, Waypoint, TSLocation, WaypointType } from "./types";
 
 /**
 *
@@ -26,7 +19,7 @@ const distance = (location1: ILocation, location2: ILocation): number =>
 * @returns List of waypoints outputs in the most efficient
 * order (minimizing distance between locations)
 */
-const execute = (trips: ITrip[]): IWaypointOutput[] => 
+export const execute = (trips: ITrip[]): IWaypointOutput[] => 
 {
 
     
@@ -34,15 +27,18 @@ const execute = (trips: ITrip[]): IWaypointOutput[] =>
     return route;
 }
 
-//create an example set of trips
-var ts = [
-    new Trip("1", new Waypoint(1, new TSLocation(0, 0)), new Waypoint(2, new TSLocation(3, 6))),
-    new Trip("2", new Waypoint(1, new TSLocation(1, 0)), new Waypoint(2, new TSLocation(2, 6))),
-    new Trip("3", new Waypoint(1, new TSLocation(2, 2)), new Waypoint(2, new TSLocation(3, 6))),
-    new Trip("4", new Waypoint(1, new TSLocation(6, 3)), new Waypoint(2, new TSLocation(3, 6))),
-    new Trip("5", new Waypoint(1, new TSLocation(3, 4)), new Waypoint(2, new TSLocation(5, 8))),
-];
+function convertWaypointType(pickupType: WaypointType)
+{
+    switch(pickupType)
+    {
+        case WaypointType.Pickup:  return "Pickup";
+        case WaypointType.Dropoff:  return "Dropoff";
+    }
+}
 
-//Call execute with our example set
-var route = execute(ts);
-printWaypointOutputs(route);
+export function printWaypointOutputs(waypoints: IWaypointOutput[])
+{
+    waypoints.forEach(element => {
+        console.log("Trip " + element.tripId + " " + convertWaypointType(element.type));
+    });
+}
