@@ -5,7 +5,7 @@ https://drive.google.com/file/d/1nE782S8Ss68JepMQNeZhUrCUatKK4XvY/view
 
 ### Running
 
-The algorithm can be run by using tests from Test.ts. This sets it up with a test dataset and prints out results to the console.
+The algorithm can be run by running Test.ts. This sets it up with a test dataset and prints out results to the console.
 
 ### Implementation
 
@@ -20,5 +20,5 @@ I spent a few hours on this total. Most of my time was actually spent getting us
 ### Questions
 
 1. As this implementation only provides a greedy search, it's likely that for any extended search space the optimal solution won't be found. Also my implementation only performs a single pass on the search space, and doesn't try and reoptimise any given route.
-2. Given more time I would implement a different method. I have experience using Genetic Algorithms, and some research suggests that people have successfully applied GAs to the TSP before, so it would be cool to try it on this constrained version! Implementing a limit on the riders per shuttle (see assumption #1 above) would also have been a future improvement.
+2. Given more time I would implement a different method. I have experience using Genetic Algorithms, and some research suggests that people have successfully applied GAs to the TSP before, so it would be cool to try it on this constrained version! Runtime would be worse with GA than nearest neighbour. Implementing a limit on the riders per shuttle (see assumption #1 above) would also have been a future improvement.
 3. As I said above, the time consuming part was mainly learning TypeScript syntax and nuances!
