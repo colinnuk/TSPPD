@@ -35,6 +35,7 @@ export interface ILeg
 {
     tripId: TripId
     waypoint: IWaypoint
+    distance: number
 }
 
 export class Location implements ILocation 
@@ -89,12 +90,14 @@ export class WaypointOutput implements IWaypointOutput
 
 export class Leg implements ILeg
 {
-    constructor(tripId: TripId, waypoint: IWaypoint)
+    constructor(tripId: TripId, waypoint: IWaypoint, distance: number)
     {
         this.tripId = tripId;
         this.waypoint = waypoint;
+        this.distance = distance;
     }
 
     tripId: TripId;
     waypoint: IWaypoint;
+    distance: number;
 }

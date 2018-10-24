@@ -74,7 +74,7 @@ export const findNearestLeg = (waypointList: {[key: string]: IWaypoint}, current
         let dist = distance(waypointList[element].location, currentLocation);
         if(dist < nearestNeighbourDist)
         {
-            nearestNeighbour = new Leg(element, waypointList[element]);
+            nearestNeighbour = new Leg(element, waypointList[element], dist);
             nearestNeighbourDist = dist;
         }
     });
