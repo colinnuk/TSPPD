@@ -3,9 +3,13 @@
 Travelling salesman problem with contraints on pickup and dropoff.
 https://drive.google.com/file/d/1nE782S8Ss68JepMQNeZhUrCUatKK4XvY/view
 
-### Running
+### Executiong
 
-The algorithm can be run by running Test.ts. This sets it up with a test dataset and prints out results to the console.
+The algorithm can be run by executing the transpiled test.js in node. This sets it up with a test dataset and prints out results to the console.
+
+```
+node .\Test.js
+```
 
 ### Implementation
 
