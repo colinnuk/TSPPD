@@ -21,7 +21,7 @@ const distance = (location1: ILocation, location2: ILocation): number =>
 */
 export const execute = (trips: ITrip[]): IWaypointOutput[] => 
 {
-    let firstTrip = trips.pop();
+    const firstTrip = trips.pop();
     let route = [new WaypointOutput(firstTrip.id, WaypointType.Pickup)];
     
     //create a list of nodes we need to visit and add the dropoff waypoint for our starting waypoint
@@ -42,7 +42,7 @@ export const execute = (trips: ITrip[]): IWaypointOutput[] =>
     {
         //While there are still nodes to visit
         // Get the nearest neighbouring leg of the trip & remove it from waypointsToVisit
-        let nearestLeg = findNearestLeg(waypointsToVisit, currentLocation);
+        const nearestLeg = findNearestLeg(waypointsToVisit, currentLocation);
         currentLocation = nearestLeg.waypoint.location;
         delete waypointsToVisit[nearestLeg.tripId];
         
@@ -71,7 +71,7 @@ export const findNearestLeg = (waypointList: {[key: string]: IWaypoint}, current
     let nearestNeighbourDist: number = Infinity;
 
     Object.keys(waypointList).forEach(element => {
-        let dist = distance(waypointList[element].location, currentLocation);
+        const dist = distance(waypointList[element].location, currentLocation);
         if(dist < nearestNeighbourDist)
         {
             nearestNeighbour = new Leg(element, waypointList[element], dist);
