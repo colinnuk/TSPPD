@@ -8,7 +8,7 @@ The algorithm can be run by using tests from Test.ts. This sets it up with a tes
 ### Implementation
 I decided to go with a simple greeedy (nearest neighbour) approach. This is efficient, easy to implement, and produces a reasonable approximation of the solution.
 
-I spent 2 or 3 hours on this total. Most of my time was actually spent getting used to using TypeScript - I've never used it before!
+I spent a few hours on this total. Most of my time was actually spent getting used to using TypeScript - I've never used it before!
 
 ### Assumptions
 1. The shuttle was infinitely big, so the shuttle can carry all passengers at once. One way I could have implemented a rider limit would have been to only fill waypointsToVisit[] with dropoffs once the limit was reached.

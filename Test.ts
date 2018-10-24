@@ -10,7 +10,6 @@ const convertWaypointType = (pickupType: WaypointType): string =>
     }
 }
 
-
 export function printWaypointOutputs(waypoints: IWaypointOutput[])
 {
     waypoints.forEach(element => {
