@@ -3,7 +3,7 @@ import { execute, printWaypointOutputs } from "./TSPPD"
 
 //create an example set of trips
 let ts = [
-    new Trip("A", new Waypoint(1, new TSLocation(0, 0)), new Waypoint(2, new TSLocation(3, 6))),
+    new Trip("A", new Waypoint(1, new TSLocation(2, 6)), new Waypoint(2, new TSLocation(0, 1))),
     new Trip("B", new Waypoint(1, new TSLocation(1, 0)), new Waypoint(2, new TSLocation(2, 6))),
     new Trip("C", new Waypoint(1, new TSLocation(2, 2)), new Waypoint(2, new TSLocation(3, 6))),
     new Trip("D", new Waypoint(1, new TSLocation(6, 3)), new Waypoint(2, new TSLocation(3, 6))),

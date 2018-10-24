@@ -25,34 +25,35 @@ export const execute = (trips: ITrip[]): IWaypointOutput[] =>
     let route = [new WaypointOutput(firstTrip.id, WaypointType.Pickup)];
     
     //create a list of nodes we need to visit and add the dropoff waypoint for our starting waypoint
-    let nodesToVisit: {[key: string]: IWaypoint} = {};
-    nodesToVisit[firstTrip.id] = firstTrip.dropoffWaypoint;
+    let waypointsToVisit: {[key: string]: IWaypoint} = {};
+    waypointsToVisit[firstTrip.id] = firstTrip.dropoffWaypoint;
 
     //stores an assoc array we can quickly get the dropoffs out of
     let dropoffWaypoints: {[key: string]: IWaypoint} = {};
 
-    //fill nodesToVisit with other pickups
+    //fill waypointsToVisit with other pickups
     trips.forEach(element => {
-        nodesToVisit[element.id] = element.pickupWaypoint;
+        waypointsToVisit[element.id] = element.pickupWaypoint;
         dropoffWaypoints[element.id] = element.dropoffWaypoint;
     });
 
     let currentLocation = firstTrip.pickupWaypoint.location;
-    while(Object.keys(nodesToVisit).length > 0)
+    while(Object.keys(waypointsToVisit).length > 0)
     {
         //While there are still nodes to visit
-        //    - Get the nearest neighbouring trip
-        //    	- Remove it from nodesToVisit list
-        let nearestTrip = findNearestTrip(nodesToVisit, currentLocation);
-        let nearestTripWaypoint = nodesToVisit[nearestTrip];
-        delete nodesToVisit[nearestTrip];
-        // add to output
+        // Get the nearest neighbouring trip & remove it from waypointsToVisit
+        let nearestTrip = findNearestTrip(waypointsToVisit, currentLocation);
+        let nearestTripWaypoint = waypointsToVisit[nearestTrip];
+        currentLocation = nearestTripWaypoint.location;
+        delete waypointsToVisit[nearestTrip];
+        
+        // add waypoint to output
         route.push(new WaypointOutput(nearestTrip, nearestTripWaypoint.type));
-        //    	- If it’s a pickup, add the corresponding drop off 
+        
+        // If it’s a pickup, add the corresponding drop off to waypointsToVisit
         if(nearestTripWaypoint.type == WaypointType.Pickup)
-        {
-            nodesToVisit[nearestTrip] = dropoffWaypoints[nearestTrip];
-        }
+            waypointsToVisit[nearestTrip] = dropoffWaypoints[nearestTrip];
+        
     }
     
     return route;
