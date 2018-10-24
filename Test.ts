@@ -1,7 +1,6 @@
 import { Trip, Waypoint, Location, WaypointType, IWaypointOutput, WaypointOutput, IWaypoint, Leg } from "./types";
 import { execute, distance, findNearestLeg } from "./TSPPD"
 import { expect } from 'chai';
-import 'mocha';
 
 const convertWaypointType = (pickupType: WaypointType): string =>
 {

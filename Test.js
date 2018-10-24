@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var types_1 = require("./types");
 var TSPPD_1 = require("./TSPPD");
 var chai_1 = require("chai");
-require("mocha");
 var convertWaypointType = function (pickupType) {
     switch (pickupType) {
         case types_1.WaypointType.Pickup: return "Pickup";
