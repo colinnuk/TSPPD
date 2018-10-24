@@ -5,10 +5,11 @@ https://drive.google.com/file/d/1nE782S8Ss68JepMQNeZhUrCUatKK4XvY/view
 
 ### Executing
 
-The algorithm can be run by executing the transpiled Test.js in node. This sets it up with a test dataset and prints out results to the console.
+First, need to run "npm install" to install all dependencies.
+Then the algorithm can be run by executing the tests. This runs unit tests against the algorithm.
 
 ```
-node .\Test.js
+npm run test
 ```
 
 ### Implementation

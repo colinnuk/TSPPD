@@ -6,7 +6,7 @@ import { IWaypointOutput, ILocation, ITrip, WaypointOutput, WaypointType, IWaypo
 * @param location2 Input location
 * @returns Very simple crow distance between 2 points
 */
-const distance = (location1: ILocation, location2: ILocation): number => 
+export const distance = (location1: ILocation, location2: ILocation): number => 
 {
     const dlat = (location2.latitude - location1.latitude)
     const dlon = (location2.longitude - location1.longitude)

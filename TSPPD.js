@@ -7,7 +7,7 @@ var types_1 = require("./types");
 * @param location2 Input location
 * @returns Very simple crow distance between 2 points
 */
-var distance = function (location1, location2) {
+exports.distance = function (location1, location2) {
     var dlat = (location2.latitude - location1.latitude);
     var dlon = (location2.longitude - location1.longitude);
     return Math.sqrt(dlat * dlat + dlon * dlon);
@@ -57,7 +57,7 @@ exports.findNearestLeg = function (waypointList, currentLocation) {
     var nearestNeighbour;
     var nearestNeighbourDist = Infinity;
     Object.keys(waypointList).forEach(function (element) {
-        var dist = distance(waypointList[element].location, currentLocation);
+        var dist = exports.distance(waypointList[element].location, currentLocation);
         if (dist < nearestNeighbourDist) {
             nearestNeighbour = new types_1.Leg(element, waypointList[element], dist);
             nearestNeighbourDist = dist;
